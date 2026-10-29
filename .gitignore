@@ -1,0 +1,2 @@
+app/server/frontend/dist/*
+!app/server/frontend/dist/index.html
