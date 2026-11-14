@@ -23,3 +23,17 @@ module "alb" {
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
 }
+
+module "ecs" {
+  source = "./modules/ecs"
+
+  name                  = "memos"
+  region                = var.aws_region
+  image                 = "${module.ecr.repository_url}:v1"
+  vpc_id                = module.vpc.vpc_id
+  private_subnet_ids    = module.vpc.private_subnet_ids
+  alb_security_group_id = module.alb.alb_security_group_id
+  target_group_arn      = module.alb.target_group_arn
+
+  depends_on = [module.alb]
+}
