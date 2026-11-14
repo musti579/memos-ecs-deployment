@@ -22,6 +22,8 @@ module "alb" {
   name              = "memos"
   vpc_id            = module.vpc.vpc_id
   public_subnet_ids = module.vpc.public_subnet_ids
+  certificate_arn   = module.acm.certificate_arn 
+  
 }
 
 module "ecs" {
@@ -36,4 +38,14 @@ module "ecs" {
   target_group_arn      = module.alb.target_group_arn
 
   depends_on = [module.alb]
+}
+
+module "acm" {
+  source = "./modules/acm"
+
+  domain_name  = var.domain_name
+  zone_name    = var.zone_name
+  alb_dns_name = module.alb.alb_dns_name
+  alb_zone_id  = module.alb.alb_zone_id
+  
 }

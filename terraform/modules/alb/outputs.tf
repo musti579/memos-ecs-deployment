@@ -13,3 +13,7 @@ output "alb_security_group_id" {
 output "target_group_arn" {
   value = aws_lb_target_group.app.arn
 }
+
+output "alb_zone_id" {
+  value = aws_lb.main.zone_id
+}

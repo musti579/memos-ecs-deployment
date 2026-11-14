@@ -9,3 +9,15 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "domain_name" {
+  description = "Domain for the app"
+  type        = string
+  default     = "memos.mustafaabukars.com"
+}
+
+variable "zone_name" {
+  description = "Existing Route 53 hosted zone"
+  type        = string
+  default     = "mustafaabukars.com"
+}
